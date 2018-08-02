@@ -1,0 +1,13 @@
+.description {
+    display: table;
+    width: 400px;
+}
+
+.table-hover tr {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.table-hover tr:hover {
+    background-color: aliceblue;
+}
