@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
+require_once('ImageManipulator.php');
 // Instantiate the app
 $app = new \Slim\App(['settings' => require __DIR__ . '/../config/settings.php']);
 

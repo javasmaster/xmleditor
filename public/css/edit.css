@@ -1,0 +1,14 @@
+input {
+    padding: 4px;
+    width: 100%;
+}
+
+textarea {
+    padding: 4px;
+    min-height: 205px;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+}

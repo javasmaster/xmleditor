@@ -1,6 +1,6 @@
 <!doctype html>
-<?php if (file_exists('test.xml')) {
-    $xml = simplexml_load_file('test.xml');
+<?php if (file_exists('test-1.xml')) {
+    $xml = simplexml_load_file('test-1.xml');
     $i = 0;
 }
 else {
@@ -12,19 +12,17 @@ else {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Easy Drag and Drop HTML Table Rows With jQuery</title>
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Editor</title>
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
-    <link href="../public/css/table.css" rel="stylesheet">
-
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/css/table.css" rel="stylesheet">
+    <script src="public/js/bootstrap.min.js"></script>
   </head>
 
   <body>
 
     <main role="main" class="container">
-
      <table class="table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
@@ -49,12 +47,25 @@ else {
             
             <?php foreach($xml->news as $news) { ?>
             <tr id="row_links_list_<?= $i ?>">
-              <td><?= $i ?></td>
-              <td><a href="#">Edit</a></td>
+              <td class="row" id="<?= $i ?>"><?= $i ?></td>
+              <td class="edit"><a href="edit/<?= $i ?>">Edit</a></td> <!-- onClick="getElementById('win').removeAttribute('style');" -->
               <td><a href="#">Delete</a></td>
               <td><?= $news->articleURI ?></td>
               <td><?= $news->title ?></td>
-              <td><?= $news->imageURI ?></td>
+              <td><?php 
+              $d = $i+1; // xpath works from the 1 index
+              $tags = $xml->xpath("/newsList/news[".$d."]"); 
+              foreach($tags as $tag) { // gets all the images related to the article
+                  echo $tag->xpath("imageURI")[0];
+                //   print_r($tag->xpath("imageURI".$n));
+                for($n = 2; $n < 10; $n++) {
+                    if(!empty($tag->xpath("imageURI".$n))) {
+                        echo "<br />".$tag->xpath("imageURI".$n)[0];
+                    }
+                    else break;
+                }
+              } 
+              ?></td>
               <td class="description"><?= $news->description ?></td>
               <td><?= $news->imageCredit ?></td>
               <td><?= $news->sourceName ?></td>
@@ -84,16 +95,50 @@ else {
             // console.log(JSON.stringify(order_data));
             $.ajax({
                 type: "POST",
-                url: "/public/sort",
+                url: "sort",
                 data: { "data": order_data },
                 success: function(msg){
+                    let i = 0;
+                    $( ".row" ).each(function() {
+                        $(this).html(i);
+                        i++;
+                    }); 
                     console.log( "Прибыли данные: " + msg );
                 }
             });
         }
     
     });
-        </script>
+    </script>
+    <script>
+    // $(document).ready(function() {
+    //     $('.edit').on('click', function() {
+    //         let id = $(this).closest('tr').find('.row').attr('id');
+    //             $.ajax({
+    //                 type: "GET",
+    //                 url: "/public/edit/" + id,
+    //                 success: function(msg){
+    //                     console.log( "Прибыли данные: " + msg );
+
+    //                     console.log($title);
+    //             }
+    //         });
+
+    //     // console.log(d);
+    //     })
+        
+    // })
+    </script>
+<div id="win" style="display:none;">
+      <div class="overlay"></div>
+          <div class="visible">
+            <h2>Зарегистрироваться</h2>
+              <div class="content">
+                  <?= 'Hello, Dolly'; ?>
+              </div>
+           <button type="button" onClick="getElementById('win').style.display='none';" class="close">закрыть</button>
+      </div>
+    </div>
 
   </body>
 </html>

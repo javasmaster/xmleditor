@@ -1,0 +1,56 @@
+.overlay {
+	background: #000;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
+	opacity: .5;
+}
+.visible {
+	background: #fff;
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    margin-top: -200px;
+    overflow: hidden;
+    z-index: 2000;
+    width: 500px;
+    padding: 18px;
+    margin-left: -250px;
+    font-family: Oswald;
+}
+
+#win, #win2 .close {
+	font-size: 12px;
+	color: black;
+	text-align: center;
+	margin-top: 20px;
+	width: 100%;
+}
+#win, #win2 button {
+	line-height: 20px;
+    margin-bottom: 22px;
+    background-color: white;
+    border: none;
+    background: transparent;
+    color: #773347;
+    font-size: 17px;
+    text-align: center;
+}
+#win, #win2 button[type="button"]:hover {
+	cursor: pointer;
+	color: navy;
+	text-decoration: underline;
+}
+#win #win2 h3, h2 {
+	text-align: center;
+	color: #555;
+}
+.content {
+	padding: 0 1em;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background: WhiteSmoke;
+}

@@ -1,6 +1,7 @@
 {
     "require": {
         "slim/slim": "3.0",
-        "league/plates": "^3.3"
+        "league/plates": "^3.3",
+        "twbs/bootstrap": "^4.1"
     }
 }
