@@ -49,7 +49,7 @@ else {
             <tr id="row_links_list_<?= $i ?>">
               <td class="row" id="<?= $i ?>"><?= $i ?></td>
               <td class="edit"><a href="edit/<?= $i ?>">Edit</a></td> <!-- onClick="getElementById('win').removeAttribute('style');" -->
-              <td><a href="#">Delete</a></td>
+              <td><a href="№" class="delete-item" onclick="return false">Delete</a></td>
               <td><?= $news->articleURI ?></td>
               <td><?= $news->title ?></td>
               <td><?php 
@@ -111,34 +111,25 @@ else {
     });
     </script>
     <script>
-    // $(document).ready(function() {
-    //     $('.edit').on('click', function() {
-    //         let id = $(this).closest('tr').find('.row').attr('id');
-    //             $.ajax({
-    //                 type: "GET",
-    //                 url: "/public/edit/" + id,
-    //                 success: function(msg){
-    //                     console.log( "Прибыли данные: " + msg );
+    $(document).ready(function() {
+        $('.delete-item').on('click', function() {
+            let id = $(this).closest('tr').find('.row').attr('id');
+                $.ajax({
+                    type: "GET",
+                    url: "delete/" + id,
+                    success: function(res){
+                        if(res == 1) {
+                            window.location.reload();
+                        }
 
-    //                     console.log($title);
-    //             }
-    //         });
+                        // console.log($title);
+                }
+            });
 
-    //     // console.log(d);
-    //     })
+        // console.log(d);
+        })
         
-    // })
+    });
     </script>
-<div id="win" style="display:none;">
-      <div class="overlay"></div>
-          <div class="visible">
-            <h2>Зарегистрироваться</h2>
-              <div class="content">
-                  <?= 'Hello, Dolly'; ?>
-              </div>
-           <button type="button" onClick="getElementById('win').style.display='none';" class="close">закрыть</button>
-      </div>
-    </div>
-
   </body>
 </html>

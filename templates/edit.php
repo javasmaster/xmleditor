@@ -78,6 +78,14 @@ else {
                     <input name="photoURI" type="text" value="<?= $edit->photoURI ?>" />
                 </div>
                 <div class="form-group">
+                    <label for="photoURI">Video URI</label><br />
+                    <input name="photoURI" type="text" value="<?= $edit->videoURI ?>" />
+                </div>
+                <div class="form-group">
+                    <label for="photoURI">Video Tooltip</label><br />
+                    <input name="photoURI" type="text" value="<?= $edit->videoTooltip ?>" />
+                </div>
+                <div class="form-group">
                     <label for="description">Description</label><br />
                     <textarea name="description"><?= $edit->description ?></textarea>
                 </div>

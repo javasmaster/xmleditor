@@ -93,7 +93,12 @@ $app->post('/edit/{id}', function (Request $request, Response $response, $args) 
         }
         else {
             $element->nodeValue = '';
-            $element->appendChild($dom->createCDATASection($value));
+            if($element->nodeName == "imageURI" || $element->nodeName == "sourceImageURI") {
+                $element->nodeValue = $value;
+            }
+            else {
+                $element->appendChild($dom->createCDATASection($value));
+            }
         }
 
     }
@@ -147,6 +152,21 @@ $app->post('/sort', function (Request $request, Response $response) {
     $reorder_item = $root->removeChild($element);
     $insert = $element_insert->parentNode->insertBefore($reorder_item,$element_insert);
     // header('Content-Type: text/xml');  
-    echo $dom->save('test-1.xml');
-    return true;
+    $dom->save('test-1.xml');
+    $result = ($dom !== false) ? 1 : 0;
+
+    echo $result;
+});
+
+$app->get('/delete/{id}', function (Request $request, Response $response, $args) { 
+    $id = intval($args['id']);
+    $dom = new DOMDocument;
+    $dom->load("test-1.xml");
+    $root = $dom->documentElement;
+    $element = $dom->getElementsByTagName('news')->item($id); 
+    $remove_item = $root->removeChild($element);
+    $dom->save('test-1.xml');
+    $result = ($dom !== false) ? 1 : 0;
+
+    echo $result;
 });
