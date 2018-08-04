@@ -27,7 +27,7 @@ else {
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-            <form action="/xmleditor/edit/<?= $this->e($id) ?>" method="post" enctype="multipart/form-data">
+            <form action="/edit/<?= $this->e($id) ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label><br />
                     <input name="title" type="text" value="<?= $edit->title ?>" />
